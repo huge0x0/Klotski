@@ -1,7 +1,10 @@
 package controllers;
 
-import javax.swing.JPanel;
-
-public class ShowScore extends JPanel{
+public class ShowScore{
+	String[] userName;
+	String[] userScore;
 	
+	private void getScore() {
+		
+	}
 }
