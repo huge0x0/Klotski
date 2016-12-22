@@ -22,7 +22,7 @@ public class ShowScore{
 		return sShowScore;
 	}
 	
-	public void ShowScore() {
+	public ShowScore() {
 		mScoreModel=ScoreModel.getModel();
 		mScoreHolder=mScoreModel.getScore();
 	}
@@ -49,6 +49,7 @@ public class ShowScore{
 	public static void main(String[] args) {
 		JFrame jFrame=new JFrame();
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jFrame.setSize(5, 500);
 		ShowScore showScore=ShowScore.getController();
 		ShowScoreView showScoreView=showScore.getScoreView();
 		jFrame.add(showScoreView);
