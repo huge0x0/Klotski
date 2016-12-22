@@ -39,7 +39,8 @@ public class GameFrame extends JFrame{
 	
 	public void showScore() {
 		mContentPanel.removeAll();
-		ShowScore showScore=ShowScore.getPanel();
+		ShowScore showScore=ShowScore.getController();
+		ShowScoreView showScoreView=ShowScore.getPanel();
 		mContentPanel.add(showScore);
 	}
 	
