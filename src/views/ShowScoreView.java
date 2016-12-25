@@ -4,6 +4,7 @@ import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
@@ -17,7 +18,9 @@ public class ShowScoreView extends JPanel{
 	private Button mButton;
 	private static final int BOUNDHEIGHT=30;
 	
-	public ShowScoreView(ScoreHolder scoreHolder,Button returnButton) {
+	public ShowScoreView(ScoreHolder scoreHolder,ActionListener listener) {
+		mButton=new Button("play again");
+		mButton.addActionListener(listener);
 		Box vBox=Box.createVerticalBox();
 		vBox.add(Box.createVerticalStrut(50));
 		Box hBox=Box.createHorizontalBox();
@@ -27,7 +30,7 @@ public class ShowScoreView extends JPanel{
 		hBox.add(Box.createGlue());
 		vBox.add(hBox);
 		vBox.add(Box.createGlue());
-		vBox.add(returnButton);
+		vBox.add(mButton);
 		add(vBox);
 	}
 	
@@ -69,7 +72,7 @@ public class ShowScoreView extends JPanel{
 		ScoreHolder mytestHolder=(new ScoreModel()).new ScoreHolder();
 		mytestHolder.setScore("test", 222);
 		mytestHolder.setScore("tes22t", 33);
-		ShowScoreView myTestView=new ShowScoreView(mytestHolder,new Button("tetst"));
+		ShowScoreView myTestView=new ShowScoreView(mytestHolder,new ActionListener());
 		myFrame.getContentPane().add(myTestView);
 		myFrame.setVisible(true);
 	}

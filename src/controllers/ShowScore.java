@@ -33,8 +33,7 @@ public class ShowScore{
 	}
 	
 	public ShowScoreView getScoreView() {
-		Button returnButton=new Button("Play Again");
-		returnButton.addActionListener(new ActionListener() {
+		ShowScoreView showScoreView=new ShowScoreView(mScoreHolder,new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -42,14 +41,13 @@ public class ShowScore{
 				gameFrame.play();
 			}
 		});
-		ShowScoreView showScoreView=new ShowScoreView(mScoreHolder,returnButton);
 		return showScoreView;
 	}
 	
 	public static void main(String[] args) {
 		JFrame jFrame=new JFrame();
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jFrame.setSize(5, 500);
+		jFrame.setSize(500, 500);
 		ShowScore showScore=ShowScore.getController();
 		ShowScoreView showScoreView=showScore.getScoreView();
 		jFrame.add(showScoreView);
