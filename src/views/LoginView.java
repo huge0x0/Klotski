@@ -86,7 +86,7 @@ public class LoginView extends JFrame{
 class LoginandRegister{//登录查询
 	static boolean search(String user,String pword)throws IOException{
 		String[][] yonghu=new String[10][2];
-		File file = new File("E:\\javafiles\\Klotski\\src\\views\\用户密码.txt");//存放数组数据的文件
+		File file = new File("res\\userid.txt");//存放数组数据的文件
 		//FileWriter out = new FileWriter(file);  //文件写入流
 		BufferedReader in = new BufferedReader(new FileReader(file));  //
 		String line;  //一行数据
@@ -120,7 +120,7 @@ class LoginandRegister{//登录查询
 	static void add(String user,String pword)throws IOException{  
         String temp="\r\n"+user+"\t"+pword;  
         String temp2=user+"\t"+pword;
-        File file = new File("E:\\javafiles\\Klotski\\src\\views\\用户密码.txt");  
+        File file = new File("res\\userid.txt");  
         if(file.exists() && file.length() != 0) {  
         	FileOutputStream fos = new FileOutputStream(file,true);//true表示在文件末尾追加  
             fos.write(temp.getBytes()); 
