@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import models.ScoreModel.ScoreHolder;
 import values.IntValue;
+import values.StringValue;
 
 public class ScoreModel {
 	
@@ -24,8 +25,7 @@ public class ScoreModel {
 	}
 	
 	public ScoreModel() {
-		String filePath="res\\score.txt";
-		mFileScoreFile=new File(filePath);
+		mFileScoreFile=new File(StringValue.SCORE_FILE);
 		
 		if(!mFileScoreFile.exists()){
 			try{
@@ -93,8 +93,8 @@ public class ScoreModel {
 		private int num;
 		
 		public ScoreHolder() {
-			mUserName=new String[IntValue.SCORELENGTH];
-			mUserScore=new int[IntValue.SCORELENGTH];
+			mUserName=new String[IntValue.SCORE_LENGTH];
+			mUserScore=new int[IntValue.SCORE_LENGTH];
 			num=-1;
 		}
 		
@@ -112,7 +112,7 @@ public class ScoreModel {
 		
 		public void setScore(String userName,int userScore) {
 			num++;
-			if(num<IntValue.SCORELENGTH){
+			if(num<IntValue.SCORE_LENGTH){
 				mUserScore[num] = userScore;
 				mUserName[num] = userName;
 				

@@ -24,27 +24,31 @@ public class GameFrame extends JFrame{
 	public void startGame() {
 		login();
 	}
+	public void loginCompelete(){
+		play();
+	}
 	
-	public void login() {
+	private void login() {
 		mContentPanel.removeAll();
 		LoginPanel loginPanel=LoginPanel.getPanel();
 		mContentPanel.add(loginPanel);
 	}
 	
-	public void play() {
+	
+	private void play() {
 		mContentPanel.removeAll();
 		PlayPanel playPanel=PlayPanel.getPanel();
 		mContentPanel.add(playPanel);
 	}
 	
-	public void showScore() {
+	private void showScore() {
 		mContentPanel.removeAll();
 		ShowScore showScore=ShowScore.getController();
 		ShowScoreView showScoreView=ShowScore.getPanel();
 		mContentPanel.add(showScore);
 	}
 	
-	public void choseLevel() {
+	private void choseLevel() {
 		mContentPanel.removeAll();
 		ChoseLevel choseLevel=ChoiceLevel.getPanel();
 		mContentPanel.add(choseLevel);
