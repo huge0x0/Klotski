@@ -5,10 +5,16 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 
+import models.LevelModel.PieceInformation;
+import views.LoginView;
+import views.ShowScoreView;
+
 public class GameFrame extends JFrame{
 	private static GameFrame sGameFrame;
 	
 	private Container mContentPanel;
+	
+	private String mUserName;
 	
 	public static GameFrame getFrame(){
 		if(sGameFrame==null){
@@ -24,28 +30,41 @@ public class GameFrame extends JFrame{
 	public void startGame() {
 		login();
 	}
-	public void loginCompelete(){
-		play();
+	
+	public void loginCompelete(String userName){
+		mUserName=userName;
+		choseLevel();
+	}
+
+	public void choseFinish(PieceInformation[] pieceInformations) {
+		play(pieceInformations);
+		
+	}
+	
+	public void playSucceed(long playTime){
+		showScore(playTime);
 	}
 	
 	private void login() {
 		mContentPanel.removeAll();
-		LoginPanel loginPanel=LoginPanel.getPanel();
-		mContentPanel.add(loginPanel);
+		LoginView loginView=new LoginView();
+		mContentPanel.add(loginView);
 	}
 	
 	
-	private void play() {
+	private void play(PieceInformation[] pieceInformations) {
 		mContentPanel.removeAll();
-		PlayPanel playPanel=PlayPanel.getPanel();
+		Play play=Play.getController(pieceInformations);
 		mContentPanel.add(playPanel);
 	}
 	
-	private void showScore() {
+	private void showScore(long playTime) {
 		mContentPanel.removeAll();
+		int score=(int)playTime;
 		ShowScore showScore=ShowScore.getController();
-		ShowScoreView showScoreView=ShowScore.getPanel();
-		mContentPanel.add(showScore);
+		showScore.setScore(mUserName, score);
+		ShowScoreView showScoreView=showScore.getScoreView();
+		mContentPanel.add(showScoreView);
 	}
 	
 	private void choseLevel() {
@@ -53,4 +72,5 @@ public class GameFrame extends JFrame{
 		ChoseLevel choseLevel=ChoiceLevel.getPanel();
 		mContentPanel.add(choseLevel);
 	}
+
 }

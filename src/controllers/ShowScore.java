@@ -33,7 +33,8 @@ public class ShowScore{
 	}
 	
 	public ShowScoreView getScoreView() {
-		ShowScoreView showScoreView=new ShowScoreView(mScoreHolder,new ActionListener() {
+		ShowScoreView showScoreView=new ShowScoreView(mScoreHolder);
+		showScoreView.getButton(ShowScoreView.BUTTON_PLAY_AGAIN).addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

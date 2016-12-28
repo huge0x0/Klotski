@@ -7,20 +7,28 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import models.ScoreModel;
 import models.ScoreModel.ScoreHolder;
+import values.IntValue;
 
 public class ShowScoreView extends JPanel{
+	static public final int BUTTON_PLAY_AGAIN=0;
+	static public final int BUTTON_RETURN=1;
+	static public final int BUTTON_NEXT=2;
 	private RankListPanel mRankList;
-	private Button mButton;
+	private Button mButtonPlayAgain;
+	private Button mButtonReturn;
+	private Button mButtonNext;
 	private static final int BOUNDHEIGHT=30;
 	
-	public ShowScoreView(ScoreHolder scoreHolder,ActionListener listener) {
-		mButton=new Button("play again");
-		mButton.addActionListener(listener);
+	public ShowScoreView(ScoreHolder scoreHolder) {
+		mButtonPlayAgain=new Button("play again");
+		mButtonReturn=new Button("return");
+		mButtonNext=new Button("next");
 		Box vBox=Box.createVerticalBox();
 		vBox.add(Box.createVerticalStrut(50));
 		Box hBox=Box.createHorizontalBox();
@@ -30,8 +38,26 @@ public class ShowScoreView extends JPanel{
 		hBox.add(Box.createGlue());
 		vBox.add(hBox);
 		vBox.add(Box.createGlue());
-		vBox.add(mButton);
+		Box hButtonBox=Box.createHorizontalBox();
+		hButtonBox.add(Box.createGlue());
+		hButtonBox.add(mButtonNext);
+		hButtonBox.add(Box.createGlue());
+		hButtonBox.add(mButtonPlayAgain);
+		hButtonBox.add(Box.createGlue());
+		hButtonBox.add(mButtonReturn);
+		hButtonBox.add(Box.createGlue());
+		vBox.add(hButtonBox);
+		vBox.setSize(IntValue.CHECKERBOARD_WIDTH*IntValue.UNIT_LEN, IntValue.CHECKERBOARD_HEIGHT*IntValue.UNIT_LEN);
 		add(vBox);
+	}
+	
+	public Button getButton(int name){
+		switch (name) {
+		case BUTTON_PLAY_AGAIN:
+			return mButtonPlayAgain;
+		default:
+			return null;
+		}
 	}
 	
 	private class RankListPanel extends JPanel{
@@ -72,8 +98,8 @@ public class ShowScoreView extends JPanel{
 		ScoreHolder mytestHolder=(new ScoreModel()).new ScoreHolder();
 		mytestHolder.setScore("test", 222);
 		mytestHolder.setScore("tes22t", 33);
-		//ShowScoreView myTestView=new ShowScoreView(mytestHolder,new ActionListener());
-		//myFrame.getContentPane().add(myTestView);
-		//myFrame.setVisible(true);
+		ShowScoreView myTestView=new ShowScoreView(mytestHolder);
+		myFrame.getContentPane().add(myTestView);
+		myFrame.setVisible(true);
 	}
 }

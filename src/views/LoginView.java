@@ -10,16 +10,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.naming.directory.SearchControls;
 import javax.swing.*;
+
+import controllers.GameFrame;
 import controllers.LoginAndRegister;
 
-public class LoginView extends JFrame{
+public class LoginView extends JPanel{
 	public static void main(String[] args)
 	   {
-		LoginView  frame = new LoginView ();
+		/*LoginView  frame = new LoginView ();
 		 frame.setSize(500, 400);
 		 frame.setTitle("登录");
 	     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	     frame.show();
+	     frame.show();*/
 	  }
 	
 	JButton jb1,jb2;  
@@ -63,7 +65,7 @@ public class LoginView extends JFrame{
         	public void actionPerformed(ActionEvent e){
         		try {
 					if(LoginAndRegister.search(jtf.getText(), jpwd.getText())){  //判断用户名是否正确，进入游戏界面
-						System.out.println("OK");  //画面转换接口
+						GameFrame.getFrame().loginCompelete(jtf.getText());
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
