@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controllers.PlayHu;
 import models.LevelModel.PieceInformation;
 import values.IntValue;
 import values.StringValue;
@@ -24,6 +25,10 @@ public class CheckerBoard extends JLabel{
 	private int mNumber;
 	//棋盘可用情况
 	private boolean[][] mSpace;
+	//棋盘终点
+	private int mTargetY;
+	//主棋子编号
+	private int mMainPieceNum;
 	
 	public CheckerBoard() {
 		mPieces=new ArrayList<PieceHolder>();
@@ -32,7 +37,8 @@ public class CheckerBoard extends JLabel{
 		for(int i=0;i<IntValue.CHECKERBOARD_HEIGHT;i++)
 			for(int j=0;j<IntValue.CHECKERBOARD_HEIGHT;j++)
 				mSpace[i][j]=true;
-		
+		mTargetY=-1;
+		mMainPieceNum=-1;
 
 		int width=IntValue.UNIT_LEN*IntValue.CHECKERBOARD_WIDTH;
 		int height=IntValue.UNIT_LEN*IntValue.CHECKERBOARD_HEIGHT;
@@ -50,13 +56,16 @@ public class CheckerBoard extends JLabel{
 		
 		int len=pieces.length;
 		for(int i=0;i<len;i++){
-			addPiece(new Piece(pieces[i].getWidth(),pieces[i].getHeight()),
+			int kind=pieces[i].getKind();
+			if(kind==)
+				addMainPiece(new MainPiece(0, 0), x, y)
+			addNormalPiece(new Piece(pieces[i].getWidth(),pieces[i].getHeight()),
 					pieces[i].getX(), pieces[i].getY());
 		}
 	}
 	
 	//添加一个棋子在位置(x,y)处，返回添加成功后的棋子序号。
-	public int addPiece(Piece piece,int x,int y) {
+	private int addPiece(Piece piece,int x,int y) {
 		boolean success=isAddable(piece, x, y);
 		
 		if(success){
@@ -68,6 +77,30 @@ public class CheckerBoard extends JLabel{
 		}
 		else
 			return -1;
+	}
+	
+	private int addMainPiece(MainPiece mainPiece,int x,int y) {
+		if(mMainPieceNum!=-1)
+			return mMainPieceNum;
+		
+		int num=addPiece(mainPiece, x, y);
+		if(num!=-1){
+			mTargetY=y;
+			MainPieceListener mainPieceListener=new MainPieceListener(num);
+			mainPiece.setMouseListener(mainPieceListener);
+			mainPiece.setMouseMotionListener(mainPieceListener);
+		}
+		return num;
+	}
+	
+	public int addNormalPiece(Piece piece,int x,int y){
+		int num=addPiece(piece, x, y);
+		if(num!=-1){
+			PieceDragListener pieceDragListener=new PieceDragListener(num);
+			piece.setMouseListener(pieceDragListener);
+			piece.setMouseMotionListener(pieceDragListener);
+		}
+		return num;
 	}
 	
 	//根据相对位置(x,y)把棋子piece放到棋盘上。
@@ -244,15 +277,15 @@ public class CheckerBoard extends JLabel{
 	}
 	
 	//棋子监听器
-	public class PieceDragListener implements MouseListener,MouseMotionListener{
+	private class PieceDragListener implements MouseListener,MouseMotionListener{
 
-		private CheckerBoard mCheckerBoard;
-		private int mPieceNum;
-		private int mX;
-		private int mY;
+		protected CheckerBoard mCheckerBoard;
+		protected int mPieceNum;
+		protected int mX;
+		protected int mY;
+		protected Piece mPiece;
 		private int mDX;
 		private int mDY;
-		private Piece mPiece;
 		//用于控制拖动
 		private int mMouseStartX;
 		private int mMouseStartY;
@@ -374,6 +407,24 @@ public class CheckerBoard extends JLabel{
 
 	}
 
+	//主棋子监听器
+	private class MainPieceListener extends PieceDragListener{
+
+		public MainPieceListener(int pieceNum) {
+			super(pieceNum);
+			// TODO Auto-generated constructor stub
+		}
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			super.mouseReleased(e);
+			if(mX==IntValue.CHECKERBOARD_WIDTH-mPiece.getPieceWidth()&&mY==mCheckerBoard.mTargetY){
+				PieceReturn(mPiece, IntValue.CHECKERBOARD_WIDTH, mY);
+				PlayHu.getController().succeedPlay();
+			}
+		}
+		
+	}
 	//测试
 		static public void main(String[] args){
 			JFrame frame=new JFrame();
@@ -384,24 +435,15 @@ public class CheckerBoard extends JLabel{
 			CheckerBoard model=new CheckerBoard();
 			Piece myPiece=new HorizontalLongPiece(0, 0);
 			Piece myPiece2=new VerticalShortPiece(0, 0);
-			int piece1Num=model.addPiece(myPiece, 0, 0);
-			int piece2Num=model.addPiece(myPiece2, 0, 1);
+			MainPiece mainPiece=new MainPiece(0, 0);
+			int piece1Num=model.addNormalPiece(myPiece, 0, 0);
+			int piece2Num=model.addNormalPiece(myPiece2, 0, 1);
+			int mainPieceNum=model.addMainPiece(mainPiece, 4, 4);
 			
 			panel.add(model);
 			frame.getContentPane().add(panel);
 			frame.setVisible(true);
 			
-			//myPiece.movePiece(147, 0);
-			//model.PieceReturn(myPiece, 2, 2);
-			
-			PieceDragListener pieceDragListener=model.new PieceDragListener(piece1Num);
-			myPiece.setMouseListener(pieceDragListener);
-			myPiece.setMouseMotionListener(pieceDragListener);
-			
-
-			PieceDragListener pieceDragListener2=model.new PieceDragListener(piece2Num);
-			myPiece2.setMouseListener(pieceDragListener2);
-			myPiece2.setMouseMotionListener(pieceDragListener2);
 			
 			
 		}
