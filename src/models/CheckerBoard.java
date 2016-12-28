@@ -19,15 +19,15 @@ import values.IntValue;
 import values.StringValue;
 
 public class CheckerBoard extends JLabel{
-	//Æå×ÓÁÐ±í
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	private ArrayList<PieceHolder> mPieces;
-	//Æå×ÓÊýÁ¿
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private int mNumber;
-	//ÆåÅÌ¿ÉÓÃÇé¿ö
+	//ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private boolean[][] mSpace;
-	//ÆåÅÌÖÕµã
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½
 	private int mTargetY;
-	//Ö÷Æå×Ó±àºÅ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½
 	private int mMainPieceNum;
 	
 	public CheckerBoard() {
@@ -42,7 +42,7 @@ public class CheckerBoard extends JLabel{
 
 		int width=IntValue.UNIT_LEN*IntValue.CHECKERBOARD_WIDTH;
 		int height=IntValue.UNIT_LEN*IntValue.CHECKERBOARD_HEIGHT;
-		//ÉèÖÃ±³¾°
+		//ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½
 		ImageIcon imageIcon=new ImageIcon(StringValue.CHECKERBOARD_IMG);
 		Image image=imageIcon.getImage();
 		image=image.getScaledInstance(width,height, Image.SCALE_FAST);
@@ -64,7 +64,7 @@ public class CheckerBoard extends JLabel{
 		}
 	}
 	
-	//Ìí¼ÓÒ»¸öÆå×ÓÔÚÎ»ÖÃ(x,y)´¦£¬·µ»ØÌí¼Ó³É¹¦ºóµÄÆå×ÓÐòºÅ¡£
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½(x,y)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¡ï¿½
 	private int addPiece(Piece piece,int x,int y) {
 		boolean success=isAddable(piece, x, y);
 		
@@ -103,7 +103,7 @@ public class CheckerBoard extends JLabel{
 		return num;
 	}
 	
-	//¸ù¾ÝÏà¶ÔÎ»ÖÃ(x,y)°ÑÆå×Ópiece·Åµ½ÆåÅÌÉÏ¡£
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½(x,y)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pieceï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½
 	private void putPiece(Piece piece,int x,int y) {
 		x=(int)getLocation().getX()+x*IntValue.UNIT_LEN;
 		y=(int)getLocation().getY()+y*IntValue.UNIT_LEN;
@@ -111,11 +111,11 @@ public class CheckerBoard extends JLabel{
 		add(piece);
 	}
 	
-	//½«Æå×Ó·Åµ½(x,y)Î»ÖÃÉÏ£¬ÓÐ»Ø¹é¶¯»­
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ó·Åµï¿½(x,y)Î»ï¿½ï¿½ï¿½Ï£ï¿½ï¿½Ð»Ø¹é¶¯ï¿½ï¿½
 	public void setPiece(int pieceNum,int x,int y){
 		PieceHolder pieceHolder=getPieceHolder(pieceNum);
 
-		//´æÏÂÔ­Ê¼Î»ÖÃ
+		//ï¿½ï¿½ï¿½ï¿½Ô­Ê¼Î»ï¿½ï¿½
 		int oldX=pieceHolder.getX();
 		int oldY=pieceHolder.getY();
 		Piece piece=pieceHolder.getPiece();
@@ -134,26 +134,26 @@ public class CheckerBoard extends JLabel{
 		PieceReturn(piece, x, y);
 	}
 	
-	//»Ø¹é¶¯»­
+	//ï¿½Ø¹é¶¯ï¿½ï¿½
 	private void PieceReturn(Piece piece,int x,int y){
-		//Ä¿µÄ×ø±ê
+		//Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		x=(int)getLocation().getX()+x*IntValue.UNIT_LEN;
 		y=(int)getLocation().getY()+y*IntValue.UNIT_LEN;
 		
-		//µ±Ç°×ø±ê
+		//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 		int nowX=piece.getX();
 		int nowY=piece.getY();
 		
-		//ËÙ¶È
+		//ï¿½Ù¶ï¿½
 		int velocityX=x>nowX?IntValue.VELOCITY:(-IntValue.VELOCITY);
 		int velocityY=y>nowY?IntValue.VELOCITY:(-IntValue.VELOCITY);
 		
-		//ÖØ»æ´ÎÊý
+		//ï¿½Ø»ï¿½ï¿½ï¿½ï¿½ï¿½
 		int countX=(x-nowX)/velocityX;
 		int countY=(y-nowY)/velocityY;
 		int count=countX>countY?countX:countY;
 		
-		//ÖØ»æ
+		//ï¿½Ø»ï¿½
 		for(int i=0;i<count;i++){
 			if(i<countX)
 				nowX=nowX+velocityX;
@@ -171,7 +171,7 @@ public class CheckerBoard extends JLabel{
 		piece.setLocation(x, y);
 	}
 	
-	//ÅÐ¶ÏÊÇ·ñ¿ÉÒÔÌí¼ÓÆå×Ó
+	//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private boolean isAddable(Piece piece,int x,int y){
 		boolean isAddable=true;
 		
@@ -191,14 +191,14 @@ public class CheckerBoard extends JLabel{
 		return isAddable;
 	}
 	
-	//ÉèÖÃmSpace£¬¶ÔÓ¦¾ØÐÎÇøÓòÉèÎª¶ÔÓ¦
+	//ï¿½ï¿½ï¿½ï¿½mSpaceï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ó¦
 	private void setSpace(int x,int y,int width,int height,boolean b) {
 		for(int i=0;i<height;i++)
 			for(int j=0;j<width;j++)
 				mSpace[y+i][x+j]=b;
 
 
-		//µ÷ÊÔ
+		//ï¿½ï¿½ï¿½ï¿½
 		/*for(int i=0;i<IntValue.CHECKERBOARD_HEIGHT;i++)
 			{
 			for(int j=0;j<IntValue.CHECKERBOARD_WIDTH;j++)
@@ -209,13 +209,13 @@ public class CheckerBoard extends JLabel{
 	}
 	
 	
-	//ÅÐ¶Ï±àºÅÎªpieceNumµÄÆå×ÓÊÇ·ñ¿ÉÒÔÒÆ¶¯µ½(x,y)ÉÏ
+	//ï¿½Ð¶Ï±ï¿½ï¿½ï¿½ÎªpieceNumï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½(x,y)ï¿½ï¿½
 	public boolean isMovable(int pieceNum,int x,int y){
 		
 		boolean isMovable=false;
 		PieceHolder pieceHolder=getPieceHolder(pieceNum);
 
-		//´æÏÂÔ­Ê¼Î»ÖÃ
+		//ï¿½ï¿½ï¿½ï¿½Ô­Ê¼Î»ï¿½ï¿½
 		int oldX=pieceHolder.getX();
 		int oldY=pieceHolder.getY();
 		Piece piece=pieceHolder.getPiece();
@@ -232,19 +232,19 @@ public class CheckerBoard extends JLabel{
 		return isMovable;
 	}
 	
-	//»ñµÃ¶ÔÓ¦±àºÅµÄÆå×Ó
+	//ï¿½ï¿½ï¿½Ã¶ï¿½Ó¦ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public Piece getPiece(int position){
 		PieceHolder pieceHolder=mPieces.get(position);
 		return pieceHolder.getPiece();
 	}
 	
-	//»ñµÃ¶ÔÓ¦±àºÅµÄpieceHolder
+	//ï¿½ï¿½ï¿½Ã¶ï¿½Ó¦ï¿½ï¿½ï¿½Åµï¿½pieceHolder
 	private PieceHolder getPieceHolder(int position){
 		return mPieces.get(position);
 	}
 	
-	//Æå×Óholder£¬´æ´¢Æå×ÓºÍËüµÄÎ»ÖÃ
+	//ï¿½ï¿½ï¿½ï¿½holderï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½Óºï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 	private class PieceHolder{
 		private int mX;
 		private int mY;
@@ -276,7 +276,7 @@ public class CheckerBoard extends JLabel{
 		}
 	}
 	
-	//Æå×Ó¼àÌýÆ÷
+	//ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	private class PieceDragListener implements MouseListener,MouseMotionListener{
 
 		protected CheckerBoard mCheckerBoard;
@@ -286,14 +286,14 @@ public class CheckerBoard extends JLabel{
 		protected Piece mPiece;
 		private int mDX;
 		private int mDY;
-		//ÓÃÓÚ¿ØÖÆÍÏ¶¯
+		//ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½
 		private int mMouseStartX;
 		private int mMouseStartY;
-		//¼ÇÂ¼³õÊ¼Î»ÖÃ
+		//ï¿½ï¿½Â¼ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 		private int mStartPositionX;
 		private int mStartPositionY;
 		
-		//±êÖ¾£¬0Îª¿ÉÒÔÒÆ¶¯×´Ì¬£¬1Îª²»¿ÉÒÔÕý·½ÏòÒÆ¶¯£¬-1Îª²»¿ÉÒÔ¸º·½ÏòÒÆ¶¯
+		//ï¿½ï¿½Ö¾ï¿½ï¿½0Îªï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½×´Ì¬ï¿½ï¿½1Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½-1Îªï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 		private int mFlag;
 		
 		public PieceDragListener(int pieceNum) {
@@ -329,11 +329,11 @@ public class CheckerBoard extends JLabel{
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			if(mPiece.isHorizontalMovable()){
-				//Æå×ÓÊó±ê×ø±êÎ»ÒÆ
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 				int mouseDX=e.getX()-mMouseStartX;
-				//Æå×Ó×ø±êÎ»ÒÆ
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 				int positionDX=mPiece.getX()-mStartPositionX+mouseDX;
-				//Ä¿±êÆåÅÌÎ»ÖÃÎ»ÒÆ
+				//Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Î»ï¿½ï¿½
 				int dX=positionDX/IntValue.UNIT_LEN;
 				if(positionDX>0)
 					dX++;
@@ -355,11 +355,11 @@ public class CheckerBoard extends JLabel{
 			}
 			
 			if(mPiece.isVerticalMovable()){
-				//Æå×ÓÊó±ê×ø±êÎ»ÒÆ
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 				int mouseDY=e.getY()-mMouseStartY;
-				//Æå×Ó×ø±êÎ»ÒÆ
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 				int positionDY=mPiece.getY()-mStartPositionY+mouseDY;
-				//Ä¿±êÆåÅÌÎ»ÖÃÎ»ÒÆ
+				//Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Î»ï¿½ï¿½
 				int dY=positionDY/IntValue.UNIT_LEN;
 				if(positionDY>0)
 					dY++;
@@ -407,7 +407,7 @@ public class CheckerBoard extends JLabel{
 
 	}
 
-	//Ö÷Æå×Ó¼àÌýÆ÷
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	private class MainPieceListener extends PieceDragListener{
 
 		public MainPieceListener(int pieceNum) {
@@ -425,7 +425,7 @@ public class CheckerBoard extends JLabel{
 		}
 		
 	}
-	//²âÊÔ
+	//ï¿½ï¿½ï¿½ï¿½
 		static public void main(String[] args){
 			JFrame frame=new JFrame();
 			frame.setSize(600, 600);
@@ -444,6 +444,17 @@ public class CheckerBoard extends JLabel{
 			frame.getContentPane().add(panel);
 			frame.setVisible(true);
 			
+			myPiece.movePiece(147, 0);
+			model.PieceReturn(myPiece, 2, 2);
+			
+			PieceDragListener pieceDragListener=model.new PieceDragListener(piece1Num);
+			myPiece.setMouseListener(pieceDragListener);
+			myPiece.setMouseMotionListener(pieceDragListener);
+			
+
+			PieceDragListener pieceDragListener2=model.new PieceDragListener(piece2Num);
+			myPiece2.setMouseListener(pieceDragListener2);
+			myPiece2.setMouseMotionListener(pieceDragListener2);
 			
 			
 		}
