@@ -10,11 +10,20 @@ import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LevelModel {
+	
 	public static void main(String[] args) throws IOException{
-		PieceReceive(3);
+		LevelModel LV=new LevelModel();
+		PieceInformation[] p = new PieceInformation[2] ;
+		PieceInformation[] t = new PieceInformation[2] ;
+		p[0]=LV.new PieceInformation(1, 1, 1);
+		p[1]=LV.new PieceInformation(2,2,2);
+		PieceReceive(p);
 		System.out.println("OK");
+		t=LV.PieceBack();
+		
 	}
-	public class PieceInformation{
+	
+	public class PieceInformation{  //棋子信息
 		public static final int MAIN=1;
 		public static final int VERTICAL_SHORT=2;
 		public static final int VERTICAL_LONG=3;
@@ -53,8 +62,9 @@ public class LevelModel {
 			mkind=kind;
 		}
 	}
-	
-	static File file=new File("res/Piecelnf.txt");
+	//File Level=new File("res\\Level\\");
+	//File[] Levels=Level.listFiles();
+	static File file=new File("res/PieceInf.txt");
 	static void PieceReceive(PieceInformation[] p) throws IOException{//棋子信息写入文件
 		FileWriter out = new FileWriter(file); //文件写入流
 		for(int i=0;i<p.length;i++){
@@ -63,25 +73,31 @@ public class LevelModel {
 			out.write(String.valueOf(p[i].getY()));
 			out.write("\t");
 			out.write(String.valueOf(p[i].getkind()));
-			out.write("\n");
+			out.write("\r\n");
 		}
 		out.close();
 	}
 	static PieceInformation[] PieceBack() throws IOException{//传出棋子信息
-		PieceInformation PieceInf[] = null;
+		
 		BufferedReader in = new BufferedReader(new FileReader(file));  //
-		String line;  //一行数据
-		  int row=0;
-		  //逐行读取，并将每个数组放入到数组中
-		  /*while((line = in.readLine()) != null){
-		   String[] temp = line.split("\t"); 
-		   for(int j=0;j<temp.length;j++){
-		    arr2[row][j] = Double.parseDouble(temp[j]);
-		   }
-		   row++;
-		  }
-		  in.close();*/
-		return PieceInf;
+		String line,line2;  //一行数据
+		int row=0,row2=0;
+	    //逐行读取，并将每个数组放入到数组中
+		while((line = in.readLine()) != null){
+			 row++;
+		}
+		PieceInformation PieceInf[] = new PieceInformation[row];
+		while((line2 = in.readLine()) != null){
+			String[] temp = line2.split("\t"); 
+			for(int i=0;i<row;i++){
+				PieceInf[i].setX(Integer.parseInt(temp[0]));
+				PieceInf[i].setY(Integer.parseInt(temp[1]));
+				PieceInf[i].setkind(Integer.parseInt(temp[2]));
+			}
+			row2++;
+		 }
+		 in.close();
+		 return PieceInf;
 	}
 }
 
