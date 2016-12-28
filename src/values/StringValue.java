@@ -1,6 +1,7 @@
 package values;
 
 public class StringValue {
+	public static final String BACKGROUND="res\\piece.jpg";
 	public static final String SCORE_FILE1="res\\score";
 	public static final String SCORE_FILE2=".txt";
 	public static final String LONG_PIECE_IMG="res\\piece.jpg";
