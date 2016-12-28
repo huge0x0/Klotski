@@ -31,11 +31,11 @@ public class SelectView extends JFrame{
 	    for(int i = 0; i<21; i++){
 	    	jb[i].addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {	
-				
+				//进入相应关卡
 				}
 	    	});
 	    }
-	    contentPane.add(new JButton("Privious"));
+	    //contentPane.add(new JButton("Privious"));
 	    contentPane.add(new JButton("Back"));
 	    contentPane.add(new JButton("Next"));
 	    setSize(500,400);

@@ -67,6 +67,9 @@ public class LoginView extends JPanel{
 					if(LoginAndRegister.search(jtf.getText(), jpwd.getText())){  //判断用户名是否正确，进入游戏界面
 						GameFrame.getFrame().loginCompelete(jtf.getText());
 					}
+					else{
+						JOptionPane.showMessageDialog(null,"密码错误或用户名不存在，请重新输入或立即注册！", "错误提示 ", JOptionPane.ERROR_MESSAGE);
+					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
