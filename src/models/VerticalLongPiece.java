@@ -1,26 +1,28 @@
 package models;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import values.StringValue;
 
 public class VerticalLongPiece extends Piece {
-	private boolean mHorizontalMovable;
 	
 	public VerticalLongPiece(int positionX,int positionY) {
 		super(positionX,positionY,1,3);
-		getPieceView().setBackground(StringValue.LONG_PIECE_IMG);
-		getPieceView().setClickedBackground(StringValue.CLICKED_LONG_PIECE_IMG);
-		getPieceView().useBackground();
+		setBackground(StringValue.LONG_PIECE_IMG);
+		setClickedBackground(StringValue.CLICKED_LONG_PIECE_IMG);
+		useBackground();
 		mHorizontalMovable=false;
 	}
 	
 	public void moveUp(int offset) {
 		if(offset>0)
-			super.move(0,offset);
+			super.setLocation(getX(), offset);
 	}
 	
 	public void moveDown(int offset) {
 		if(offset>0)
-			super.move(0,-offset);
+			super.setLocation(getX(), -offset);
 	}
 	
 	public void setHorizontalMovable(boolean isMovable) {
@@ -28,10 +30,23 @@ public class VerticalLongPiece extends Piece {
 	}
 	
 	@Override
-	public void move(int horizontal,int vertical){
+	public void movePiece(int horizontal,int vertical){
 		if(mHorizontalMovable)
-			super.move(horizontal,vertical);
+			super.movePiece(horizontal,vertical);
 		else
-			super.move(0, vertical);
+			super.movePiece(0, vertical);
+	}
+	
+	static public void main(String[] args){
+		JFrame frame=new JFrame();
+		frame.setSize(600, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel panel=new JPanel(null);
+		
+		VerticalLongPiece myPiece=new VerticalLongPiece(200, 100);
+		panel.add(myPiece);
+		frame.getContentPane().add(panel);
+		//myPiece.movePiece(0, 200);
+		frame.setVisible(true);
 	}
 }

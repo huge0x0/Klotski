@@ -1,6 +1,11 @@
 package controllers;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 import models.CheckerBoard;
+import values.IntValue;
 
 public class PlayHu {
 	private static PlayHu sPlayHu;
@@ -16,4 +21,5 @@ public class PlayHu {
 	public PlayHu() {
 		
 	}
+	
 }

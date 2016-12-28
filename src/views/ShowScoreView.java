@@ -72,8 +72,8 @@ public class ShowScoreView extends JPanel{
 		ScoreHolder mytestHolder=(new ScoreModel()).new ScoreHolder();
 		mytestHolder.setScore("test", 222);
 		mytestHolder.setScore("tes22t", 33);
-		ShowScoreView myTestView=new ShowScoreView(mytestHolder,new ActionListener());
-		myFrame.getContentPane().add(myTestView);
-		myFrame.setVisible(true);
+		//ShowScoreView myTestView=new ShowScoreView(mytestHolder,new ActionListener());
+		//myFrame.getContentPane().add(myTestView);
+		//myFrame.setVisible(true);
 	}
 }
