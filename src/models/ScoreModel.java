@@ -18,14 +18,19 @@ public class ScoreModel {
 	
 	private File mFileScoreFile;
 	
-	public static ScoreModel getModel() {
+	public static ScoreModel getModel(int level) {
 		if(sScoreModel==null)
 			sScoreModel=new ScoreModel();
+		sScoreModel.setFile(level);
 		return sScoreModel;
 	}
 	
 	public ScoreModel() {
-		mFileScoreFile=new File(StringValue.SCORE_FILE);
+		setFile(1);
+	}
+	
+	public void setFile(int level){
+		mFileScoreFile=new File(StringValue.SCORE_FILE1+level+StringValue.SCORE_FILE2);
 		
 		if(!mFileScoreFile.exists()){
 			try{
@@ -34,7 +39,6 @@ public class ScoreModel {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 	
 	public ScoreHolder getScore(){
@@ -66,9 +70,10 @@ public class ScoreModel {
 		String[] userName=scoreHolder.getUserName();
 		int[] userScore=scoreHolder.getUserScore();
 		
-		//创建writer
 		try {
+			//创建writer
 	         BufferedWriter out = new BufferedWriter(new FileWriter(mFileScoreFile));
+	         //写入文件
 	         for(int i=0;i<len;i++){
 	        	 out.write(userName[i]+"  "+userScore[i]);
 	        	 if(i<len-1)
@@ -79,10 +84,6 @@ public class ScoreModel {
 			e.printStackTrace();
 		}
 		
-		//写入文件
-		for(int i=0;i<len;i++){
-			
-		}
 		
 	}
 	
@@ -117,7 +118,7 @@ public class ScoreModel {
 				mUserName[num] = userName;
 				
 				for(int i=num-1;i>=0;i--){
-					if(mUserScore[i+1]>mUserScore[i])
+					if(mUserScore[i+1]<mUserScore[i])
 						change(i, i+1);
 				}
 			}else
@@ -139,7 +140,7 @@ public class ScoreModel {
 	}
 	
 	public static void main(String[] args) {
-		ScoreModel scoreModel=ScoreModel.getModel();
+		ScoreModel scoreModel=ScoreModel.getModel(1);
 		ScoreHolder scoreHolder=scoreModel.new ScoreHolder();
 		scoreHolder.setScore("a", 20);
 		scoreHolder.setScore("b", 10);

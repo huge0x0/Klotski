@@ -15,6 +15,14 @@ public class ShowScore{
 	
 	private ScoreHolder mScoreHolder;
 	private ScoreModel mScoreModel;
+	private int mLevel;
+	
+	public static ShowScore getController(int level) {
+		if(sShowScore==null)
+			sShowScore=new ShowScore();
+		sShowScore.setLevel(level);
+		return sShowScore;
+	}
 	
 	public static ShowScore getController() {
 		if(sShowScore==null)
@@ -23,7 +31,12 @@ public class ShowScore{
 	}
 	
 	public ShowScore() {
-		mScoreModel=ScoreModel.getModel();
+		setLevel(1);
+	}
+	
+	private void setLevel(int level){
+		mLevel=level;
+		mScoreModel=ScoreModel.getModel(mLevel);
 		mScoreHolder=mScoreModel.getScore();
 	}
 	
@@ -38,11 +51,15 @@ public class ShowScore{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GameFrame gameFrame=GameFrame.getFrame();
-				gameFrame.play();
+				ShowScore.getController().playAgain();
 			}
 		});
 		return showScoreView;
+	}
+	
+	private void  playAgain(){
+		GameFrame gameFrame=GameFrame.getFrame();
+		gameFrame.playAgain();
 	}
 	
 	public static void main(String[] args) {

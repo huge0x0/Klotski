@@ -21,14 +21,14 @@ public class Play {
 	private static Play sPlay;
 	
 	private CheckerBoard mCheckerBoard;
-	private PieceInformation[] mPieceInformations;
 	
 	private long mStartTime;
 	private long mEndTime;
 	
 	static public Play getController(LevelModel.PieceInformation[] pieceInformations){
 		if(sPlay==null)
-			sPlay=new Play(pieceInformations);
+			sPlay=new Play();
+		sPlay.setCheckerBoard(pieceInformations);
 		return sPlay;
 	}
 	
@@ -38,13 +38,11 @@ public class Play {
 		return sPlay;
 	}
 	
-	public Play(LevelModel.PieceInformation[] pieceInformations) {
-		mPieceInformations=pieceInformations;
-		mCheckerBoard=new CheckerBoard(pieceInformations);
+	public Play() {
 	}
 	
-	public Play() {
-		mCheckerBoard=new CheckerBoard();
+	private void setCheckerBoard(LevelModel.PieceInformation[] pieceInformations){
+		mCheckerBoard=new CheckerBoard(pieceInformations);
 	}
 	
 	public PlayView getPlayView(){
@@ -72,7 +70,7 @@ public class Play {
 	}
 	
 	public void endPlay(){
-		GameFrame.getFrame().choseFinish(mPieceInformations);
+		GameFrame.getFrame().choseAgain();
 	}
 	
 	static public void main(String[] args){
@@ -80,8 +78,12 @@ public class Play {
 		myFrame.setSize(500, 500);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		LevelModel levelModel=new LevelModel();
+		PieceInformation[] pieceInformations=new LevelModel.PieceInformation[2];
+		pieceInformations[0]=levelModel.new PieceInformation(3, 0, PieceInformation.VERTICAL_LONG);
+		pieceInformations[1]=levelModel.new PieceInformation(0, 1, PieceInformation.MAIN);
 		
-		Play play=Play.getController();
+		Play play=Play.getController(pieceInformations);
 		myFrame.getContentPane().add(play.getPlayView());
 		myFrame.setVisible(true);
 		
