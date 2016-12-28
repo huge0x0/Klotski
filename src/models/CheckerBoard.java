@@ -391,8 +391,8 @@ public class CheckerBoard extends JLabel{
 			frame.getContentPane().add(panel);
 			frame.setVisible(true);
 			
-			//myPiece.movePiece(147, 0);
-			//model.PieceReturn(myPiece, 2, 2);
+			myPiece.movePiece(147, 0);
+			model.PieceReturn(myPiece, 2, 2);
 			
 			PieceDragListener pieceDragListener=model.new PieceDragListener(piece1Num);
 			myPiece.setMouseListener(pieceDragListener);
