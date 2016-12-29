@@ -55,6 +55,10 @@ public class ShowScoreView extends JPanel{
 		switch (name) {
 		case BUTTON_PLAY_AGAIN:
 			return mButtonPlayAgain;
+		case BUTTON_NEXT:
+			return mButtonNext;
+		case BUTTON_RETURN:
+			return mButtonReturn;
 		default:
 			return null;
 		}
@@ -75,7 +79,7 @@ public class ShowScoreView extends JPanel{
 			
 			Label userNameLabel=new Label("用户名");
 			userNameLabel.setSize(ITEMWIDTH, ITEMHEIGHT);
-			Label userScoreLabel=new Label("得分");
+			Label userScoreLabel=new Label("用时");
 			userNameLabel.setSize(ITEMWIDTH, ITEMHEIGHT);
 			add(userNameLabel);
 			add(userScoreLabel);

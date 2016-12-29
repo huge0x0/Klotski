@@ -54,7 +54,33 @@ public class ShowScore{
 				ShowScore.getController().playAgain();
 			}
 		});
+		
+		showScoreView.getButton(ShowScoreView.BUTTON_NEXT).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ShowScore.getController().nextLevel();
+				
+			}
+		});
+		
+		showScoreView.getButton(ShowScoreView.BUTTON_RETURN).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ShowScore.getController().returnHomePage();
+				
+			}
+		});
 		return showScoreView;
+	}
+	
+	private void nextLevel(){
+		GameFrame.getFrame().nextLevel();
+	}
+	
+	private void returnHomePage() {
+		GameFrame.getFrame().returnHomePage();
 	}
 	
 	private void  playAgain(){

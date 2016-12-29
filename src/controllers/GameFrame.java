@@ -2,6 +2,7 @@ package controllers;
 
 import java.awt.Choice;
 import java.awt.Container;
+import java.util.logging.Level;
 
 import javax.swing.JFrame;
 
@@ -31,6 +32,12 @@ public class GameFrame extends JFrame{
 	
 	public void startGame() {
 		login();
+	}
+	
+	public void nextLevel(){
+		mLevel++;
+		mPieceInformations=LevelModel.getModel().getPieceInfos(mLevel);
+		play();
 	}
 	
 	public void loginCompelete(String userName){

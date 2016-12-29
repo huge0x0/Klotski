@@ -175,11 +175,6 @@ public class CreateLevel {
 			int y=mPiece.getY()-mCheckerBoard.getY();
 			x=x/IntValue.UNIT_LEN;
 			y=y/IntValue.UNIT_LEN;
-
-			System.out.print(mCheckerBoard.getX()+"\t");
-			System.out.print(x+"\t");
-			System.out.print(mCheckerBoard.getY()+"\t");
-			System.out.println(y);
 			
 			mCheckerBoard.addPieceForInfo(mPiece, x, y, mPieceType);
 			mCreateLevelView.remove(mPiece);

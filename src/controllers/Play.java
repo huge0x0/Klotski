@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.xml.crypto.Data;
 
 import models.CheckerBoard;
@@ -66,6 +67,7 @@ public class Play {
 	public void succeedPlay(){
 		mEndTime=System.currentTimeMillis();
 		long useTime=(mEndTime-mStartTime)/1000;
+		JOptionPane.showMessageDialog(null,"你已经通过此关，用时"+useTime+"s", "完成此关", JOptionPane.ERROR_MESSAGE);
 		GameFrame.getFrame().playSucceed(useTime);
 	}
 	

@@ -121,8 +121,18 @@ public class ScoreModel {
 					if(mUserScore[i+1]<mUserScore[i])
 						change(i, i+1);
 				}
-			}else
+			}else{
 				num--;
+				if(mUserScore[num]>userScore){
+					mUserScore[num] = userScore;
+					mUserName[num] = userName;
+					
+					for(int i=num-1;i>=0;i--){
+						if(mUserScore[i+1]<mUserScore[i])
+							change(i, i+1);
+					}
+				}
+			}
 		}
 		
 		private void change(int a,int b) {
