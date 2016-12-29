@@ -26,7 +26,7 @@ public class GameFrame extends JFrame{
 		return sGameFrame;
 	}
 	
-	public void GameFrame() {
+	public GameFrame() {
 	}
 	
 	public void startGame() {
@@ -75,7 +75,7 @@ public class GameFrame extends JFrame{
 	private void showScore(long playTime) {
 		getContentPane().removeAll();
 		int score=(int)playTime;
-		ShowScore showScore=ShowScore.getController();
+		ShowScore showScore=ShowScore.getController(mLevel);
 		showScore.setScore(mUserName, score);
 		ShowScoreView showScoreView=showScore.getScoreView();
 		getContentPane().add(showScoreView);

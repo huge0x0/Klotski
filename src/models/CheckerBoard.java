@@ -81,7 +81,7 @@ public class CheckerBoard extends JLabel{
 	}
 	
 	//添加一枚棋子，返回其编号，添加失败返回-1
-	private int addPiece(Piece piece,int x,int y) {
+	protected int addPiece(Piece piece,int x,int y) {
 		boolean success=isAddable(piece, x, y);
 		
 		if(success){
@@ -96,7 +96,7 @@ public class CheckerBoard extends JLabel{
 	}
 	
 	//添加主棋子
-	private int addMainPiece(MainPiece mainPiece,int x,int y) {
+	protected int addMainPiece(MainPiece mainPiece,int x,int y) {
 		if(mMainPieceNum!=-1)
 			return mMainPieceNum;
 		
@@ -123,8 +123,8 @@ public class CheckerBoard extends JLabel{
 	
 	//把一个棋子放到棋盘上
 	private void putPiece(Piece piece,int x,int y) {
-		x=(int)getLocation().getX()+x*IntValue.UNIT_LEN;
-		y=(int)getLocation().getY()+y*IntValue.UNIT_LEN;
+		x=x*IntValue.UNIT_LEN;
+		y=y*IntValue.UNIT_LEN;
 		piece.setLocation(x, y);
 		add(piece);
 	}
@@ -178,13 +178,11 @@ public class CheckerBoard extends JLabel{
 			if(i<countY)
 				nowY=nowY+velocityY;
 			piece.setLocation(nowX, nowY);
-			repaint();
 			
 			try {
 				Thread.sleep(IntValue.SLEEP_TIME);
 			} catch (InterruptedException e) {
-				//e.printStackTrace();
-				System.out.println("1231231");
+				e.printStackTrace();
 			}
 		}
 		piece.setLocation(x, y);
@@ -331,7 +329,7 @@ public class CheckerBoard extends JLabel{
 			mX+=mDX;
 			mY+=mDY;
 			mFlag=0;
-			mCheckerBoard.setPiece(mPieceNum, mX, mY);
+			//mCheckerBoard.setPiece(mPieceNum, mX, mY);
 		}
 		
 		@Override
@@ -396,6 +394,10 @@ public class CheckerBoard extends JLabel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			//mCheckerBoard.setPiece(mPieceNum, 4, 4);
+			Piece myPiece=new HorizontalLongPiece(0, 0);
+			int piece1Num=mCheckerBoard.addNormalPiece(myPiece, 0, 5);
+			mCheckerBoard.setPiece(piece1Num, 3, 5);
 			
 		}
 
@@ -438,25 +440,31 @@ public class CheckerBoard extends JLabel{
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			JPanel panel=new JPanel(null);
 			
-			/*CheckerBoard model=new CheckerBoard();
+			CheckerBoard model=new CheckerBoard();
 			Piece myPiece=new HorizontalLongPiece(0, 0);
 			Piece myPiece2=new VerticalShortPiece(0, 0);
 			MainPiece mainPiece=new MainPiece(0, 0);
 			int piece1Num=model.addNormalPiece(myPiece, 0, 0);
 			int piece2Num=model.addNormalPiece(myPiece2, 0, 1);
-			int mainPieceNum=model.addMainPiece(mainPiece, 0, 1);*/
+			int mainPieceNum=model.addMainPiece(mainPiece, 0, 1);
 			
+
+			/*
 			LevelModel levelModel=new LevelModel();
 			PieceInformation[] pieceInformations=new LevelModel.PieceInformation[2];
 			pieceInformations[0]=levelModel.new PieceInformation(3, 0, PieceInformation.VERTICAL_LONG);
 			pieceInformations[1]=levelModel.new PieceInformation(0, 1, PieceInformation.MAIN);
 			
 			CheckerBoard model=new CheckerBoard(pieceInformations);
-			
+			*/
 			panel.add(model);
 			frame.getContentPane().add(panel);
 			frame.setVisible(true);
 			
-			//model.PieceReturn(myPiece, 3, 3);
+			//myPiece.useClickedBackground();
+
+			Piece myPiece3=new HorizontalLongPiece(0, 0);
+			int piece1Num3=model.addNormalPiece(myPiece, 0, 5);
+			model.setPiece(piece1Num, 3, 5);
 		}
 }

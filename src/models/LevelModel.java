@@ -10,6 +10,13 @@ import java.io.IOException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LevelModel {
+	private static LevelModel sLevelModel;
+	
+	public static LevelModel getModel(){
+		if(sLevelModel==null)
+			sLevelModel=new LevelModel();
+		return sLevelModel;
+	}
 	
 	public static void main(String[] args) throws IOException{
 		LevelModel LV=new LevelModel();
