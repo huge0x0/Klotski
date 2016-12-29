@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import javax.management.MBeanAttributeInfo;
 import javax.swing.ImageIcon;
@@ -29,9 +30,12 @@ public class CheckerBoard extends JLabel {
 	private int mTargetY;
 	// 主棋子序号
 	private int mMainPieceNum;
+	//步骤记录
+	private Stack<PieceRecord> mRecords;
 
 	public CheckerBoard() {
 		mPieces = new ArrayList<PieceHolder>();
+		mRecords=new Stack<>();
 		mNumber = 0;
 		mSpace = new boolean[IntValue.CHECKERBOARD_HEIGHT][IntValue.CHECKERBOARD_WIDTH];
 		for (int i = 0; i < IntValue.CHECKERBOARD_HEIGHT; i++)
@@ -127,26 +131,56 @@ public class CheckerBoard extends JLabel {
 		piece.setLocation(x, y);
 		add(piece);
 	}
+	
+	public void back(){
+		PieceRecord pieceRecord=null;
+		if(!mRecords.isEmpty())
+			pieceRecord=mRecords.pop();
+		if(pieceRecord!=null){
+			int pieceNum=pieceRecord.num;
+			int x=pieceRecord.x;
+			int y=pieceRecord.y;
+			
+			PieceHolder pieceHolder = getPieceHolder(pieceNum);
+			
+			// 获得原来坐标
+			int oldX = pieceHolder.getX();
+			int oldY = pieceHolder.getY();
+			Piece piece = pieceHolder.getPiece();
+			
+			if (oldX != x || oldY != y) {
+				setSpace(oldX, oldY, piece.getPieceWidth(), piece.getPieceHeight(), true);
+				if (isAddable(piece, x, y)) {
+					pieceHolder.setX(x);
+					pieceHolder.setY(y);
+					setSpace(x, y, piece.getPieceWidth(), piece.getPieceHeight(), false);
+				} else
+					setSpace(oldX, oldY, piece.getPieceWidth(), piece.getPieceHeight(), false);
+			}
+	
+			PieceReturn(piece, x, y);
+		}
+	}
 
 	// 将对应编号棋子放到(x,y)处，有回归动画
 	public void setPiece(int pieceNum, int x, int y) {
 		PieceHolder pieceHolder = getPieceHolder(pieceNum);
-
+		
 		// 获得原来坐标
 		int oldX = pieceHolder.getX();
 		int oldY = pieceHolder.getY();
 		Piece piece = pieceHolder.getPiece();
-
+		
 		if (oldX != x || oldY != y) {
 			setSpace(oldX, oldY, piece.getPieceWidth(), piece.getPieceHeight(), true);
 			if (isAddable(piece, x, y)) {
+				mRecords.push(new PieceRecord(pieceNum, oldX, oldY));
 				pieceHolder.setX(x);
 				pieceHolder.setY(y);
 				setSpace(x, y, piece.getPieceWidth(), piece.getPieceHeight(), false);
 			} else
-				setSpace(oldX, oldY, piece.getPieceWidth(), piece.getPieceHeight(), false);
+				setSpace(oldX, oldY, piece.getPieceWidth(), piece.getPieceHeight(), true);
 		}
-
 		PieceReturn(piece, x, y);
 	}
 
@@ -182,8 +216,8 @@ public class CheckerBoard extends JLabel {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
-		*/
+		}*/
+		
 		piece.setLocation(x, y);
 	}
 
@@ -278,6 +312,17 @@ public class CheckerBoard extends JLabel {
 
 		public void setY(int y) {
 			mY = y;
+		}
+	}
+
+	private class PieceRecord{
+		int x;
+		int y;
+		int num;
+		public PieceRecord(int num,int x,int y) {
+			this.x=x;
+			this.y=y;
+			this.num=num;
 		}
 	}
 

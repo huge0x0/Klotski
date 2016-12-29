@@ -56,6 +56,14 @@ public class Play {
 				play.endPlay();
 			}
 		});
+		playView.getButtonBack().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mCheckerBoard.back();
+				
+			}
+		});
 		startPlay();
 		return playView;
 	}

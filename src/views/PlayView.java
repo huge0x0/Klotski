@@ -17,21 +17,28 @@ import values.IntValue;
 public class PlayView extends JPanel{
 	private CheckerBoard mCheckerBoard;
 	private JButton mButtonReturn;
+	private JButton mButtonBack;
 	
 	public PlayView(CheckerBoard checkerBoard) {
 		mCheckerBoard=checkerBoard;
 		mButtonReturn=new JButton("return");
+		mButtonBack=new JButton("back");
 		
 		Box vBox=Box.createVerticalBox();
 		vBox.add(checkerBoard);
 		vBox.add(Box.createVerticalStrut(15));
 		vBox.add(mButtonReturn);
+		vBox.add(mButtonBack);
 
 		add(vBox);
 	}
 	
 	public JButton getButtonReturn(){
 		return mButtonReturn;
+	}
+	
+	public JButton getButtonBack(){
+		return mButtonBack;
 	}
 	
 	static public void main(String[] args){
