@@ -3,7 +3,10 @@ package values;
 public class StringValue {
 	public static final String BACKGROUND="res\\piece.jpg";
 	public static final String SCORE_FILE1="res\\score";
+	public static final String LEVEL_NUM_FILE="res\\levelnum.txt";
 	public static final String SCORE_FILE2=".txt";
+	public static final String LEVEL_FILE1="res\\levels\\level";
+	public static final String LEVEL_FILE2=".txt";
 	public static final String LONG_PIECE_IMG="res\\pound4.jpg";
 	public static final String SHORT_PIECE_IMG="res\\pound5.jpg";
 	public static final String MAIN_PIECE_IMG="res\\pound2.jpg";

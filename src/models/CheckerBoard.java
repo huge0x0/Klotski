@@ -329,7 +329,7 @@ public class CheckerBoard extends JLabel{
 			mX+=mDX;
 			mY+=mDY;
 			mFlag=0;
-			//mCheckerBoard.setPiece(mPieceNum, mX, mY);
+			mCheckerBoard.setPiece(mPieceNum, mX, mY);
 		}
 		
 		@Override
@@ -394,10 +394,6 @@ public class CheckerBoard extends JLabel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			//mCheckerBoard.setPiece(mPieceNum, 4, 4);
-			Piece myPiece=new HorizontalLongPiece(0, 0);
-			int piece1Num=mCheckerBoard.addNormalPiece(myPiece, 0, 5);
-			mCheckerBoard.setPiece(piece1Num, 3, 5);
 			
 		}
 

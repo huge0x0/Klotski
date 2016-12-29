@@ -1,5 +1,7 @@
 package views;
 
+import java.awt.Button;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -23,6 +25,7 @@ public class CreateLevelView extends JPanel{
 	private VerticalLongPiece mVerticalLongPiece;
 	private VerticalShortPiece mVerticalShortPiece;
 	private MainPiece mMainPiece;
+	private Button mButtonFinish;
 	
 	public CreateLevelView() {
 		mCheckerBoard=new CreateLevelBoard();
@@ -34,6 +37,8 @@ public class CreateLevelView extends JPanel{
 		mVerticalShortPiece.setHorizontalMovable(true);
 		mMainPiece=new MainPiece(0, 2*IntValue.UNIT_LEN);
 		mMainPiece.setVerticalMovable(true);
+		mButtonFinish=new Button("finish");
+		mButtonFinish.setBounds(7*IntValue.UNIT_LEN, 7*IntValue.UNIT_LEN, IntValue.UNIT_LEN, IntValue.UNIT_LEN);
 
 		setLayout(null);
 		mCheckerBoard.setLocation(0, 3*IntValue.UNIT_LEN);
@@ -43,6 +48,7 @@ public class CreateLevelView extends JPanel{
 		add(mVerticalLongPiece);
 		add(mVerticalShortPiece);
 		add(mMainPiece);
+		add(mButtonFinish);
 		
 		
 	}
@@ -69,6 +75,10 @@ public class CreateLevelView extends JPanel{
 
 	public MainPiece getMainPiece() {
 		return mMainPiece;
+	}
+	
+	public Button getButtonFinish() {
+		return mButtonFinish;
 	}
 
 	static public void main(String[] args){

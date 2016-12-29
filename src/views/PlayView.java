@@ -4,6 +4,7 @@ import java.awt.Button;
 import java.awt.Dimension;
 
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,11 +16,11 @@ import values.IntValue;
 
 public class PlayView extends JPanel{
 	private CheckerBoard mCheckerBoard;
-	private Button mButtonReturn;
+	private JButton mButtonReturn;
 	
 	public PlayView(CheckerBoard checkerBoard) {
 		mCheckerBoard=checkerBoard;
-		mButtonReturn=new Button("return");
+		mButtonReturn=new JButton("return");
 		
 		Box vBox=Box.createVerticalBox();
 		vBox.add(checkerBoard);
@@ -29,7 +30,7 @@ public class PlayView extends JPanel{
 		add(vBox);
 	}
 	
-	public Button getButtonReturn(){
+	public JButton getButtonReturn(){
 		return mButtonReturn;
 	}
 	

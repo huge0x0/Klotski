@@ -70,7 +70,7 @@ public class Play {
 	}
 	
 	public void endPlay(){
-		GameFrame.getFrame().choseAgain();
+		GameFrame.getFrame().returnHomePage();
 	}
 	
 	static public void main(String[] args){

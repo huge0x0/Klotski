@@ -35,10 +35,18 @@ public class GameFrame extends JFrame{
 	
 	public void loginCompelete(String userName){
 		mUserName=userName;
-		choseLevel();
+		homePage();
 	}
 	
-	public void choseAgain(){
+	public void returnHomePage(){
+		homePage();
+	}
+	
+	public void homePageToCreateLevel() {
+		createLevel();
+	}
+	
+	public void homePageToChoseLevel() {
 		choseLevel();
 	}
 
@@ -60,6 +68,14 @@ public class GameFrame extends JFrame{
 		getContentPane().removeAll();
 		LoginView loginView=new LoginView();
 		getContentPane().add(loginView);
+		repaint();
+	}
+	
+	private void homePage(){
+		getContentPane().removeAll();
+		HomePage homePage=HomePage.getController();
+		getContentPane().add(homePage.getView());
+		validate();
 		repaint();
 	}
 	
@@ -85,14 +101,24 @@ public class GameFrame extends JFrame{
 	
 	private void choseLevel() {
 		getContentPane().removeAll();
-		/*ChoseLevel choseLevel=ChoiceLevel.getPanel();
-		getContentPane().add(choseLevel);*/
+		ChoseLevel choseLevel=ChoseLevel.getController();
+		getContentPane().add(choseLevel.getSelectView());
+		validate();
+		repaint();
 		
-		LevelModel levelModel=new LevelModel();
+		/*LevelModel levelModel=new LevelModel();
 		PieceInformation[] pieceInformations=new LevelModel.PieceInformation[2];
 		pieceInformations[0]=levelModel.new PieceInformation(3, 0, PieceInformation.VERTICAL_LONG);
 		pieceInformations[1]=levelModel.new PieceInformation(0, 1, PieceInformation.MAIN);
-		choseFinish(pieceInformations,1);
+		choseFinish(pieceInformations,1);*/
+	}
+	
+	private void createLevel(){
+		getContentPane().removeAll();
+		CreateLevel createLevel=CreateLevel.getController();
+		getContentPane().add(createLevel.getView());
+		validate();
+		repaint();
 	}
 
 	static public void main(String[] args){
